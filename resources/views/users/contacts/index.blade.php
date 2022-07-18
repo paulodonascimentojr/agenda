@@ -5,7 +5,7 @@
         <tr>
             <th>
                 Agenda de Contatos de {{$user->name}} 
-                <a href="{{route('contacts.create', $user->id)}}" class="bg-purple-200 rounded-full py-1 px-3">Novo</a><br>
+                <a href="{{route('contacts.create', $user->id)}}" class="bg-purple-200 rounded-full py-1 px-3">Novo contato</a><br>
             </th>
         </tr>
         <tr>

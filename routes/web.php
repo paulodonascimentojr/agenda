@@ -14,7 +14,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('contacts/{id}', [ContactController::class, 'update'])->name('contacts.update');
     Route::post('users/{id}/contacts', [ContactController::class, 'store'])->name('contacts.store');
     Route::get('users/{id}/contacts', [ContactController::class, 'index'])->name('contacts.index');
+    Route::get('/contacts/{id}', [ContactController::class, 'index'])->name('contacts.index');
     Route::get('users/{user}/contacts/show/{id}', [ContactController::class, 'show'])->name('contacts.show');
+    Route::get('users', [ContactController::class, 'index'])->name('users.index');
     //Usuários
     Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::put('users/{id}', [UserController::class, 'update'])->name('users.update');
@@ -25,8 +27,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');   
     Route::get('/', [UserController::class, 'index'])->name('users.index');
 
-    //Route::resource('user', UserController::class)->except(['show'])->middleware('cannot:manage-users');
-    //Route::resource('contact', ContactController::class)->except(['show'])->middleware('can:manage-contacts');
 });
 
 

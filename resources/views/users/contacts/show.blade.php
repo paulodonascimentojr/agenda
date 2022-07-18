@@ -7,10 +7,10 @@
             <tr>
                 <th>
                     <tr>
-                        Contato de {{$user->name}} 
+                        <h1>Contato de {{$user->name}} </h1>
                     </tr>
                     <tr>
-                        @if (isset(Auth::user()->role) && Auth::user()->role=='1' && Auth::user()->id == $user->id)
+                        @if (isset(Auth::user()->role) && Auth::user()->id == $user->id)
                             <form action="{{route('contacts.destroy', $contact->id)}}" method="POST">
                                 @method('DELETE')
                                 @csrf

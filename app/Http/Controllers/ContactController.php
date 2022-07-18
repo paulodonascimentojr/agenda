@@ -19,9 +19,9 @@ class ContactController extends Controller
     }
 
     public function index(Request $request, $userId)
-    {
-        if(!$user = $this->user->find($userId))
-            return redirect()->back();
+    {   if(!$user = $this->user->find($userId))
+            return redirect()->back();    
+        if(Auth::user()->id != $userId);
         $contacts = $user->contacts()
                             ->where('name', 'LIKE', "%{$request->search}%")
                             ->paginate(8);

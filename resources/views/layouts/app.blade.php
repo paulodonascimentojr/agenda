@@ -11,16 +11,18 @@
 <body class="bg-gray-50">
     <div class="container mx-auto px-4 py-8">
         <tr>
-            <form action="{{route('logout')}}" method="POST">
-                @csrf
-                <button type="submit"class="bg-red-800 rounded-full py-2 px-6 text-white">
-                    Sair
-                </button>
-            </form>
+            <td>
+                <form action="{{route('logout')}}" method="POST">
+                    @csrf
+                    <button type="submit"class="bg-red-800 rounded-full py-2 px-6 text-white">
+                        Sair
+                    </button>
+                </form>            
+            </td><br>
+            @if (isset(Auth::user()->role) && Auth::user()->role=='1')
+                <td class="px-5 py-5 border-b border-gray-200 bg-graay-100 text-left"><a href="{{route('users.index')}}" class="bg-green-200 rounded-full py-2 px-6">Usuários</a></td>
+            @endif
             <br>
-            <a  href="{{ url()->previous() }}">
-                <i class="bg-yellow-600 rounded-full py-2 px-6 text-white">Voltar</i>
-            </a>
         </tr><br>
         @yield('content')
     </div>

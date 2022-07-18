@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUpdateUserFormRequest;
 use App\Models\{Contact, User};
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -17,13 +18,14 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        if(Gate::denies('manage-users')){
-            //return view('contact.index');
-        }
         $users = $this->model
                         ->getUsers(
                             search: $request->search ?? ''
                         );
+        $index=Auth::user()->id;
+        
+        if(Auth::user()->role == 2)
+            return redirect('contacts/'.Auth::user()->id);
         return view('users.index', compact('users'));
     }
 
@@ -46,6 +48,10 @@ class UserController extends Controller
         {
             return redirect()->route('users.index');
         }
+        $index=Auth::user()->id;
+        if(Gate::denies('manage-users')){
+            return redirect('contacts/'.$index);
+        }
         return view('users.show', compact('user'));
     }
 
@@ -53,8 +59,13 @@ class UserController extends Controller
     {
         if(!$user = $this->model::find($id))
             return redirect()->route('users.index');
+            $index=Auth::user()->id;
+        if(Gate::denies('manage-users')){
+           return redirect('contacts/'.$index);
+        }    
         return view('users.edit', compact('user'));
     }
+
     public function update(Request $request, $id)
     {
         if(!$user = $this->model::find($id))

@@ -5,7 +5,8 @@
     <table class="min-w-full leading-normal shadow-md rounded-lg overflow-hidden">
         <tr>
             <th>
-                Listagem de usuários 
+                Listagem de usuários
+                
                 <a href="{{route('users.create')}}" class="bg-purple-200 rounded-full py-1 px-3">Novo</a><br>
             </th>
         </tr>
